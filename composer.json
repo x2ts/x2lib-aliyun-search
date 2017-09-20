@@ -1,0 +1,23 @@
+{
+  "name": "x2ts/x2lib-aliyun-search",
+  "description": "Aliyun Open Search Wrapper",
+  "type": "library",
+  "license": "BSD",
+  "authors": [
+    {
+      "name": "TingSong-Syu",
+      "email": "rek@rek.me"
+    }
+  ],
+  "require": {
+    "x2ts/x2ts": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "x2lib\\aliyun\\": "src"
+    },
+    "files": [
+      "lib/opensearch-sdk-php-3.0.1/OpenSearch/Autoloader/Autoloader.php"
+    ]
+  }
+}
