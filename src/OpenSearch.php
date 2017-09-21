@@ -58,7 +58,7 @@ class OpenSearch extends Component {
 
     public function getDocument(): DocumentClient {
         if (!$this->doc instanceof DocumentClient) {
-            $this->doc = new DocumentClient($this->client);
+            $this->doc = new DocumentClient($this->client, $this->conf['appName']);
         }
         return $this->doc;
     }
