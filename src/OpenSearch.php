@@ -10,8 +10,8 @@ namespace x2lib\aliyun;
 
 
 use OpenSearch\Client\OpenSearchClient;
-use OpenSearch\Client\SearchClient;
 use x2lib\aliyun\OpenSearch\DocumentClient;
+use x2lib\aliyun\OpenSearch\SearchClient;
 use x2ts\Component;
 
 /**
@@ -38,8 +38,8 @@ class OpenSearch extends Component {
     private $osc;
 
     public function getClient(): OpenSearchClient {
-        if (!$this->osc instanceof OpenSearchClient) {
-            $this->osc = new OpenSearchClient(
+        return $this->osc ??
+            ($this->osc = new OpenSearchClient(
                 $this->conf['accessKeyId'],
                 $this->conf['accessKeySecret'],
                 $this->conf['apiEndpoint'],
@@ -49,21 +49,20 @@ class OpenSearch extends Component {
                     'connectTimeout' => $this->conf['connectTimeout'],
                     'timeout'        => $this->conf['timeout'],
                 ]
-            );
-        }
-        return $this->osc;
+            ));
     }
 
     private $doc;
 
     public function getDocument(): DocumentClient {
-        if (!$this->doc instanceof DocumentClient) {
-            $this->doc = new DocumentClient($this->client, $this->conf['appName']);
-        }
-        return $this->doc;
+        return $this->doc ??
+            ($this->doc = new DocumentClient($this->client, $this->conf['appName']));
     }
 
+    private $sc;
+
     public function getSearch(): SearchClient {
-        return new SearchClient($this->client);
+        return $this->sc ??
+            ($this->sc = new SearchClient($this->client, $this->conf['appName']));
     }
 }
